@@ -1,7 +1,8 @@
-package com.rizqanmr.opengallery
+package com.rizqanmr.opengallery.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rizqanmr.opengallery.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
