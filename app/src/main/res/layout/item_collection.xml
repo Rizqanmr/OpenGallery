@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp4"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:text="@{item.title}"
                 android:textSize="@dimen/sp16"
                 android:textStyle="bold"

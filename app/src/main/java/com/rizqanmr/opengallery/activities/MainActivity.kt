@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.rizqanmr.opengallery.adapters.CollectionAdapter
 import com.rizqanmr.opengallery.adapters.LoadingStateAdapter
 import com.rizqanmr.opengallery.databinding.ActivityMainBinding
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPage() {
         binding.rvCollection.apply {
-            layoutManager = GridLayoutManager(this@MainActivity, 2, RecyclerView.VERTICAL, false)
+            layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
             setHasFixedSize(true)
             adapter = collectionAdapter.withLoadStateFooter(
                 footer = LoadingStateAdapter { collectionAdapter.retry() }
