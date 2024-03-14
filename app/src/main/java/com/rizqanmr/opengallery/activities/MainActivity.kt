@@ -3,6 +3,7 @@ package com.rizqanmr.opengallery.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -11,6 +12,7 @@ import com.rizqanmr.opengallery.adapters.LoadingStateAdapter
 import com.rizqanmr.opengallery.databinding.ActivityMainBinding
 import com.rizqanmr.opengallery.databinding.ItemCollectionBinding
 import com.rizqanmr.opengallery.models.CollectionsItemModel
+import com.rizqanmr.opengallery.utils.Constant
 import com.rizqanmr.opengallery.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,7 +52,10 @@ class MainActivity : AppCompatActivity() {
                 itemCollectionBinding: ItemCollectionBinding,
                 item: CollectionsItemModel?
             ) {
-                //navigate to detail
+                CollectionMediaActivity.newIntent(this@MainActivity, bundleOf().apply {
+                    putString(Constant.EXTRA_COLLECTION_ID, item?.id)
+                    putString(Constant.EXTRA_COLLECTION_TITLE, item?.title)
+                })
             }
 
         })
