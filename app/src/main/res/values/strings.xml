@@ -3,4 +3,6 @@
     <string name="collection_icon">Collection Icon</string>
     <string name="try_again">Try Again</string>
     <string name="media_image">Media Image</string>
+    <string name="empty_image">Empty Image</string>
+    <string name="empty_data">Empty Data</string>
 </resources>

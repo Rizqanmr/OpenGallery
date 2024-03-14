@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rizqanmr.opengallery.R
 import com.rizqanmr.opengallery.adapters.LoadingStateAdapter
@@ -74,6 +76,20 @@ class CollectionMediaActivity : AppCompatActivity() {
             rvMedia.apply {
                 layoutManager = GridLayoutManager(this@CollectionMediaActivity, 3)
                 setHasFixedSize(true)
+                mediaAdapter.addLoadStateListener { loadState ->
+                    if (loadState.refresh is LoadState.Loading && mediaAdapter.itemCount == 0) {
+                        isVisible = false
+                        pbLoading.isVisible = true
+                    } else if (loadState.refresh is LoadState.NotLoading && mediaAdapter.itemCount == 0) {
+                        isVisible = false
+                        pbLoading.isVisible = false
+                        flEmpty.isVisible = true
+                    } else if (loadState.refresh is LoadState.NotLoading && mediaAdapter.itemCount > 0) {
+                        isVisible = true
+                        pbLoading.isVisible = false
+                        flEmpty.isVisible = false
+                    }
+                }
                 adapter = mediaAdapter.withLoadStateFooter(
                     footer = LoadingStateAdapter { mediaAdapter.retry() }
                 )
