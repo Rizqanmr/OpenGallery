@@ -11,7 +11,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        buildConfigField("String", "BASE_URL", "\"https://api.pexels.com/v1/collections/\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.pexels.com/v1/\"")
         buildConfigField("String", "API_KEY", "\"Enter your API Key\"")
         applicationId = "com.rizqanmr.opengallery"
         minSdk = 23
