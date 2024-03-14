@@ -7,10 +7,17 @@ import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import com.rizqanmr.opengallery.R
+import com.rizqanmr.opengallery.adapters.LoadingStateAdapter
+import com.rizqanmr.opengallery.adapters.MediaAdapter
 import com.rizqanmr.opengallery.databinding.ActivityCollectionMediaBinding
+import com.rizqanmr.opengallery.databinding.ItemMediaBinding
+import com.rizqanmr.opengallery.models.MediaItemModel
 import com.rizqanmr.opengallery.utils.Constant
+import com.rizqanmr.opengallery.viewmodels.CollectionMediaViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,12 +34,15 @@ class CollectionMediaActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityCollectionMediaBinding
+    private val viewModel by viewModels<CollectionMediaViewModel>()
+    private val mediaAdapter by lazy { MediaAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCollectionMediaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.setCollectionId(intent.getStringExtra(Constant.EXTRA_COLLECTION_ID).orEmpty())
         setupObservers()
         setupViewPage()
     }
@@ -43,7 +53,9 @@ class CollectionMediaActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        //observe
+        viewModel.getCollectionMedia().observe(this) {
+            mediaAdapter.submitData(lifecycle, it)
+        }
     }
 
     private fun setupViewPage() {
@@ -58,6 +70,24 @@ class CollectionMediaActivity : AppCompatActivity() {
                 setHomeAsUpIndicator(upArrow)
                 title = intent.getStringExtra(Constant.EXTRA_COLLECTION_TITLE)
             }
+
+            rvMedia.apply {
+                layoutManager = GridLayoutManager(this@CollectionMediaActivity, 3)
+                setHasFixedSize(true)
+                adapter = mediaAdapter.withLoadStateFooter(
+                    footer = LoadingStateAdapter { mediaAdapter.retry() }
+                )
+            }
+
+            mediaAdapter.setMediaListener(object : MediaAdapter.MediaListener {
+                override fun onItemClick(
+                    itemMediaBinding: ItemMediaBinding,
+                    item: MediaItemModel?
+                ) {
+                    //open image
+                }
+
+            })
         }
     }
 }

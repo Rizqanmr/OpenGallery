@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/ivMedia"
-            android:layout_width="@dimen/dp0"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp120"
+            android:layout_height="@dimen/dp120"
             android:contentDescription="@string/media_image"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
