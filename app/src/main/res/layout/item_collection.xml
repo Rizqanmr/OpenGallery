@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        
+        <variable
+            name="item"
+            type="com.rizqanmr.opengallery.models.CollectionsItemModel" />
+    </data>
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvCollection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp8"
+        app:cardElevation="@dimen/dp4"
+        app:cardMaxElevation="@dimen/dp4"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp8">
+
+            <ImageView
+                android:id="@+id/ivCollection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/collection_icon"
+                app:srcCompat="@drawable/ic_collections"
+                app:tint="@color/dark_red"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp4"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{item.title}"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivCollection"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Title Collection" />
+
+            <TextView
+                android:id="@+id/tvSizePhotos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.sizePhotos}"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/sp12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                tools:text="78 photos" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Open Gallery</string>
+    <string name="collection_icon">Collection Icon</string>
+    <string name="try_again">Try Again</string>
 </resources>
