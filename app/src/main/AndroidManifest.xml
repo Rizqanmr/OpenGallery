@@ -16,6 +16,10 @@
         android:theme="@style/Theme.OpenGallery"
         tools:targetApi="31">
         <activity
+            android:name=".activities.PhotoViewActivity"
+            android:theme="@style/AppTheme.Transparent"
+            android:exported="false" />
+        <activity
             android:name=".activities.CollectionMediaActivity"
             android:exported="false" />
         <activity

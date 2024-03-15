@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
@@ -100,10 +101,16 @@ class CollectionMediaActivity : AppCompatActivity() {
                     itemMediaBinding: ItemMediaBinding,
                     item: MediaItemModel?
                 ) {
-                    //open image
+                    showFullScreenImage(item?.srcModel?.original.orEmpty())
                 }
 
             })
         }
+    }
+
+    private fun showFullScreenImage(imageUrl: String) {
+        PhotoViewActivity.newIntent(this, bundleOf().apply {
+            putString(Constant.EXTRA_IMAGE_URI, imageUrl)
+        })
     }
 }
